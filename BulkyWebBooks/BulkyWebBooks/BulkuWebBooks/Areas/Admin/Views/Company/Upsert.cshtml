@@ -1,0 +1,83 @@
+﻿@model BulkyWeb.Models.Models.Company
+@{
+    ViewData["Title"] = Model.CompanyId == 0 ? "Create Company" : "Edit Company";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-5 bg-light">
+            <h2 class="text-primary fw-bold mb-4">
+                <i class="bi bi-building-fill me-2"></i>@ViewData["Title"]
+            </h2>
+
+            <form asp-action="Upsert" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3"></div>
+                <input type="hidden" asp-for="CompanyId" />
+
+                <!-- Company Name -->
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" class="form-control rounded-3" placeholder="Company Name" />
+                    <label asp-for="Name"><i class="bi bi-card-text me-2"></i>Company Name</label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <!-- Street Address -->
+                <div class="form-floating mb-3">
+                    <input asp-for="StreetAddress" class="form-control rounded-3" placeholder="Street Address" />
+                    <label asp-for="StreetAddress"><i class="bi bi-house-door-fill me-2"></i>Street Address</label>
+                    <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                </div>
+
+                <!-- City / State -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input asp-for="City" class="form-control rounded-3" placeholder="City" />
+                            <label asp-for="City"><i class="bi bi-building-fill me-2"></i>City</label>
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input asp-for="State" class="form-control rounded-3" placeholder="State" />
+                            <label asp-for="State"><i class="bi bi-geo-alt-fill me-2"></i>State</label>
+                            <span asp-validation-for="State" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postal / Phone -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input asp-for="PostalCode" class="form-control rounded-3" placeholder="Postal Code" />
+                            <label asp-for="PostalCode"><i class="bi bi-mailbox2 me-2"></i>Postal Code</label>
+                            <span asp-validation-for="PostalCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-floating">
+                            <input asp-for="PhoneNumber" class="form-control rounded-3" placeholder="Phone Number" />
+                            <label asp-for="PhoneNumber"><i class="bi bi-telephone-fill me-2"></i>Phone Number</label>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg shadow-sm rounded-3">
+                        <i class="bi bi-check-circle-fill me-2"></i>Save
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary btn-lg shadow-sm rounded-3">
+                        <i class="bi bi-arrow-left-circle me-2"></i>Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

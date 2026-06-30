@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Books Page";
+}
+
+<div class="container py-4">
+    <h2 class="text-center text-primary mb-4">📚 Explore Our Book Collection</h2>
+    <div class="row g-4">
+        @foreach (var items in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="soft-panel h-100 hover-shadow">
+                    @if (items.ProductImages != null && items.ProductImages.Count() > 0)
+                    {
+                        <img src="@items.ProductImages.FirstOrDefault().ImageUrl" class="card-img-top rounded" />
+                    }
+                    else
+                    {
+                        <img src="https://placehold.co/500x600/png" class="card-img-top rounded" />
+                    }
+
+                    <div class="text-center px-2">
+                        <h5 class="fw-bold text-dark text-uppercase">@items.Title</h5>
+                        <p class="text-muted mb-1">by <span class="fw-semibold text-warning">@items.Author</span></p>
+                        <p class="mb-1">
+                            <span class="badge bg-danger text-light">List Price: @items.ListPrice.ToString("c")</span>
+                        </p>
+                        <p class="text-success fw-bold">As Low As: @items.Price.ToString("c")</p>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a asp-action="Details" asp-route-id="@items.Id" class="btn-soft btn-soft-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Soft panel style */
+    .soft-panel {
+        background: #f8f9fa;
+        border-radius: 20px;
+        padding: 1rem;
+        box-shadow: 8px 8px 20px rgba(0,0,0,0.1), -8px -8px 20px rgba(255,255,255,0.7);
+        transition: all 0.3s ease;
+    }
+
+    /* Hover lift effect */
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 10px 10px 25px rgba(0,0,0,0.15), -10px -10px 25px rgba(255,255,255,0.8);
+    }
+
+    /* Soft button base */
+    .btn-soft {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 4px 4px 12px rgba(0,0,0,0.1), -4px -4px 12px rgba(255,255,255,0.6);
+    }
+
+    /* Primary soft button */
+    .btn-soft-primary {
+        background: #4e73df;
+        color: #fff;
+    }
+
+        .btn-soft-primary:hover {
+            background: #5a8dee;
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 16px rgba(78,115,223,0.3), -6px -6px 16px rgba(255,255,255,0.7);
+        }
+
+    /* Warning soft button */
+    .btn-soft-warning {
+        background: #f6c23e;
+        color: #333;
+    }
+
+        .btn-soft-warning:hover {
+            background: #f9d56e;
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 16px rgba(246,194,62,0.3), -6px -6px 16px rgba(255,255,255,0.7);
+        }
+
+    .card-img-top {
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+</style>

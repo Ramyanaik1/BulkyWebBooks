@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BulkyWeb.Models.Models.Company>
+@{
+    ViewData["Title"] = "Companies";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body">
+            <h2 class="text-primary fw-bold mb-4">
+                <i class="bi bi-building me-2"></i>Company List
+            </h2>
+
+            <a asp-action="Upsert" class="btn btn-success mb-3">
+                <i class="bi bi-plus-circle me-2"></i>Create New Company
+            </a>
+
+            <table class="table table-hover table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>@Html.DisplayNameFor(m => m.First().Name)</th>
+                        <th>@Html.DisplayNameFor(m => m.First().StreetAddress)</th>
+                        <th>@Html.DisplayNameFor(m => m.First().City)</th>
+                        <th>@Html.DisplayNameFor(m => m.First().State)</th>
+                        <th>@Html.DisplayNameFor(m => m.First().PostalCode)</th>
+                        <th>@Html.DisplayNameFor(m => m.First().PhoneNumber)</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.StreetAddress</td>
+                            <td>@item.City</td>
+                            <td>@item.State</td>
+                            <td>@item.PostalCode</td>
+                            <td>@item.PhoneNumber</td>
+                            <td class="text-center">
+                                <a asp-action="Upsert" asp-route-id="@item.CompanyId" class="btn btn-sm btn-primary me-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.CompanyId" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
